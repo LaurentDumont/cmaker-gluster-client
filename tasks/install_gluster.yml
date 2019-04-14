@@ -10,7 +10,7 @@
     repo: deb [arch=amd64] https://download.gluster.org/pub/gluster/glusterfs/6/LATEST/Debian/stretch/amd64/apt stretch main
     state: present
 
-- name: 
+- name: Install the Gluster client.
   package:
     name: glusterfs-client
     state: latest
