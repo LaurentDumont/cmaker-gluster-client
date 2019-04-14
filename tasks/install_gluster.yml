@@ -1,0 +1,16 @@
+---
+
+- name: Add the GPG key for the Gluster repository.
+  apt_key:
+    url: https://download.gluster.org/pub/gluster/glusterfs/6/rsa.pub
+    state: present
+
+- name: Add the gluster 6.0 repository.
+  apt_repository:
+    repo: deb [arch=amd64] https://download.gluster.org/pub/gluster/glusterfs/6/LATEST/Debian/stretch/amd64/apt stretch main
+    state: present
+
+- name: 
+  package:
+    name: glusterfs-client
+    state: latest
