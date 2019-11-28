@@ -1,14 +1,31 @@
 ---
 
-- name: Add the GPG key for the Gluster repository.
+- name: Add the GPG key for the Gluster repository - Debian
   apt_key:
     url: https://download.gluster.org/pub/gluster/glusterfs/6/rsa.pub
     state: present
+  when: ansible_distribution == 'Debian'
 
-- name: Add the gluster 6.0 repository.
+- name: Add the gluster 6.0 repository - Debian
   apt_repository:
     repo: deb [arch=amd64] https://download.gluster.org/pub/gluster/glusterfs/6/LATEST/Debian/stretch/amd64/apt stretch main
     state: present
+    filename: gluster6
+  when: ansible_distribution == 'Debian'
+
+- name: Add the GPG key for the Gluster repository - Ubuntu
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: F7C73FCC930AC9F83B387A5613E01B7B3FE869A9
+    state: present
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Add the gluster 6.0 repository - Ubuntu
+  apt_repository:
+    repo: deb [arch=amd64] http://ppa.launchpad.net/gluster/glusterfs-6/ubuntu bionic main
+    state: present
+    filename: gluster6
+  when: ansible_distribution == 'Ubuntu'
 
 - name: Install the Gluster client.
   package:
